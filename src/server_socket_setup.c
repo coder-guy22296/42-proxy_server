@@ -14,10 +14,9 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 
-int     server_socket_setup(int port)
+int     server_socket_setup(int port, struct sockaddr_in *address)
 {
 	int					server_sock;
-	struct sockaddr_in	address;
 	size_t				addrlen;
 
 	addrlen = sizeof(address);
@@ -26,15 +25,15 @@ int     server_socket_setup(int port)
         printf("Opening the server socket failed!\n");
     	return (-1);
 	}
-	address.sin_family = AF_INET;
-	address.sin_addr.s_addr = INADDR_ANY;
-	address.sin_port = htons(port);
-	if ( bind(server_sock, (struct sockaddr *)&address, addrlen) )
+	address->sin_family = AF_INET;
+	address->sin_addr.s_addr = INADDR_ANY;
+	address->sin_port = htons(port);
+	if ( bind(server_sock, (struct sockaddr *)address, addrlen) == -1)
 	{
         printf("Binding the server socket failed!\n");
     	return (-1);
 	}
-	if ( listen(server_sock, 99) )
+	if ( listen(server_sock, 3) == -1)
 	{
 		printf("Listening on server socket failed!\n");
 		return (-1);

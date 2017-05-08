@@ -14,10 +14,11 @@
 
 int main()
 {
-	int server_sock;
+  	int			server_sock;
+	struct sockaddr_in	addr;
 
-	server_sock = server_socket_setup(PORT);
+	server_sock = server_socket_setup(PORT, &addr);
 	printf("listening on port %d!", PORT);
-	handle_requests(server_sock, 2048);
+	handle_requests(server_sock, 2048, &addr);
 	return (0);
 }
