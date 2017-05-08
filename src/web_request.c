@@ -15,7 +15,6 @@
 char	*web_request(char *header)
 {
 	int				socket_con;
-	int				bytes;
 	struct addrinfo	addr;
 	struct addrinfo	*res;
 	char			*response;
@@ -28,6 +27,6 @@ char	*web_request(char *header)
 	socket_con = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 	connect(socket_con, res->ai_addr, res->ai_addrlen);
 	send(socket_con, header, strlen(header), 0);
-	bytes = recv(socket_con, response, 4096, 0);
+	recv(socket_con, response, 4096, 0);
 	return (response);
 }
