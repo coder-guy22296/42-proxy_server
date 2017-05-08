@@ -6,7 +6,7 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 16:48:28 by cyildiri          #+#    #+#             */
-/*   Updated: 2017/05/07 17:12:08 by cyildiri         ###   ########.fr       */
+/*   Updated: 2017/05/07 20:28:47 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define PROXY_H
 # define PORT 4242
 # include <stdio.h>
+# include <sys/socket.h>
+# include <stdlib.h>
+# include <netinet/in.h>
+# include <string.h>
+
 /*
 **	does all the neccessary setup for the server socket before we can accept
 **	connections
