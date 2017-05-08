@@ -13,7 +13,7 @@
 #ifndef PROXY_H
 # define PROXY_H
 # define PORT 4242
-
+# include <stdio.h>
 /*
 **	does all the neccessary setup for the server socket before we can accept
 **	connections
