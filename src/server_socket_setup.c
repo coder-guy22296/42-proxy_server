@@ -15,15 +15,15 @@
 #include <fcntl.h>
 #include <errno.h>
 
-int     server_socket_setup(int port)
+int     server_socket_setup(int port, struct sockaddr_in *addr, size_t *addr_len)
 {
 	int					server_sock;
-	size_t				addrlen;
-	struct sockaddr_in address;
+	//size_t				addrlen;
+	//struct sockaddr_in address;
 	int 				opt;
 
 	opt = 0;
-	addrlen = sizeof(address);
+	//addrlen = sizeof(address);
 	if ( (server_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1)
 	{
         printf("Opening the server socket failed!\n");
@@ -34,12 +34,12 @@ int     server_socket_setup(int port)
     {
 		printf("options error! %d\n", errno);
     }
-	address.sin_family = AF_INET;
-	address.sin_addr.s_addr = INADDR_ANY;
-	address.sin_port = htons(port);
-	if ( bind(server_sock, (struct sockaddr *)&address, addrlen) == -1)
+	addr->sin_family = AF_INET;
+	addr->sin_addr.s_addr = INADDR_ANY;
+	addr->sin_port = htons(port);
+	if ( bind(server_sock, (struct sockaddr *)addr, *addr_len) == -1)
 	{
-        printf("Binding the server socket failed!\n");
+	  printf("Binding the server socket failed! %d\n", errno);
     	return (-1);
 	}
 	if ( listen(server_sock, 3) == -1)
@@ -47,7 +47,10 @@ int     server_socket_setup(int port)
 		printf("Listening on server socket failed!\n");
 		return (-1);
 	}
-
+	//*addr = address;
+	//*addr_len = addrlen;
+	//handle_requests(server_sock, 2048, &address, &addrlen);
+	/*
 	int     addr_len;
     char    *buffer;
     //char  *request;
@@ -72,7 +75,7 @@ int     server_socket_setup(int port)
             client_sock = accept(server_sock,
 								 (struct sockaddr *)&address,
 								 (socklen_t *)&addr_len);
-    }
+								 }*/
 
 	return (server_sock);
 }

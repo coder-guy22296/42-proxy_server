@@ -25,7 +25,7 @@
 **	@param	port	the port to run the server on
 **	@return	the server socket's file descriptor
 */
-int		server_socket_setup(int port);
+int		server_socket_setup(int port, struct sockaddr_in *addr, size_t *addrlen);
 
 /*
 **  forwards all requests to the url in the request to this proxy server
@@ -33,6 +33,6 @@ int		server_socket_setup(int port);
 **	@param	buff_size	size of the buffer used for reading from the socket
 **  @return the server	socket's file descriptor
 */
-void	handle_requests(int server_sock, int buff_size, struct sockaddr_in *addr);
+void	handle_requests(int server_sock, int buff_size, struct sockaddr_in *addr, size_t *addrlen);
 
 #endif

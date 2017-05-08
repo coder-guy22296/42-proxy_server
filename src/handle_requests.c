@@ -12,20 +12,20 @@
 
 #include "proxy.h"
 
-void    handle_requests(int server_sock, int buff_size, struct sockaddr_in *addr)
+void    handle_requests(int server_sock, int buff_size, struct sockaddr_in *addr, size_t *addrlen)
 {
-	int		addr_len;
+  //size_t		addr_len;
 	char	*buffer;
 	//char	*request;
 	int		bytes_read;
 	int		client_sock;
 
 	client_sock = 0;
-	addr_len = sizeof(addr);
+	//addr_len = sizeof(addr);
 	buffer = (char *)malloc(buff_size);
 	client_sock = accept(server_sock,
 						 (struct sockaddr *)addr,
-						 (socklen_t *)&addr_len);
+						 (socklen_t *)addrlen);
 	while (1)
 	{
 		if ((bytes_read = recv(client_sock, buffer, buff_size, 0)) > 0)
@@ -36,6 +36,6 @@ void    handle_requests(int server_sock, int buff_size, struct sockaddr_in *addr
 		else
 			client_sock = accept(server_sock,
 							(struct sockaddr *)addr,
-							(socklen_t *)&addr_len);
+							(socklen_t *)addrlen);
 	}
 }
