@@ -18,6 +18,7 @@ void	handle_requests(int server_sock, int buff_size,
 	char	*buffer;
 	int		bytes_read;
 	int		client_sock;
+	char	*response;
 
 	client_sock = 0;
 	buffer = (char *)malloc(buff_size);
@@ -27,6 +28,9 @@ void	handle_requests(int server_sock, int buff_size,
 		{
 			printf("recieved request:\n%s\n", buffer);
 			bzero(buffer, buff_size);
+			response = web_request("GET /index.html HTTP/1.1\r\n"
+			"Host: www.qst0.com\r\n\r\n");
+			send(client_sock, response, strlen(response), 0);
 		}
 		else
 			client_sock = accept(server_sock, (struct sockaddr *)addr,

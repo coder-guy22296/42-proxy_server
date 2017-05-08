@@ -13,7 +13,8 @@
 NAME = proxy
 SRC =   src/main.c\
 		src/server_socket_setup.c\
-		src/handle_requests.c
+		src/handle_requests.c\
+		src/web_request.c
 OFILES = $(SRC:.c=.o)
 
 all: $(NAME)

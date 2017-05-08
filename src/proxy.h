@@ -17,6 +17,8 @@
 # include <sys/socket.h>
 # include <stdlib.h>
 # include <netinet/in.h>
+# include <sys/types.h>
+# include <netdb.h>
 # include <string.h>
 
 /*
@@ -36,4 +38,6 @@ int		server_socket_setup(int port, struct sockaddr_in *addr,
 */
 void	handle_requests(int server_sock, int buff_size,
 		struct sockaddr_in *addr, size_t *addrlen);
+
+char	*web_request(char *header);
 #endif
