@@ -25,7 +25,7 @@
 **	@param	port	the port to run the server on
 **	@return	the server socket's file descriptor
 */
-int		server_socket_setup(int port, struct sockaddr_in *addr);
+int		server_socket_setup(int port);
 
 /*
 **  forwards all requests to the url in the request to this proxy server
